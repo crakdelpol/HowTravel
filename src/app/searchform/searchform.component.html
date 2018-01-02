@@ -1,0 +1,43 @@
+<div>
+  <label>Partenza:
+    <input [(ngModel)]="travel.partenza" placeholder="Partenza">
+  </label>
+</div>
+<div>
+  <label>Arrivo:
+    <input [(ngModel)]="travel.arrivo" placeholder="Arrivo">
+  </label>
+</div>
+<div>
+  <label>Data:
+    <input [(ngModel)]="travel.data" placeholder="Data">
+  </label>
+</div>
+<div><input type="button" value="cerca" (click)="findTravels()"></div>
+
+<h2>My Travels</h2>
+
+<ul *ngIf="blablacarTravel">
+  <h3>BlaBlaCar</h3>
+  <li *ngFor="let viaggio of blablacarTravel.trips" >
+    <span>Partenza: {{viaggio.departure_place.address}}, {{viaggio.departure_place.city_name}}</span>
+    <span>Arrivo: {{viaggio.arrival_place.address}}, {{viaggio.arrival_place.city_name}}</span>
+    <span>Data partenza: {{viaggio.departure_date}}</span>
+    <span>Prezzo: {{viaggio.price_with_commission.string_value}}</span>
+    <span><input type="button" value="open Detail" (click)="openDetail(viaggio.links._front)"></span>
+  </li>
+</ul>
+
+<ul *ngIf="trenitaliaTravel">
+  <h3>Trenitalia</h3>
+  <li *ngFor="let viaggio of trenitaliaTravel" >
+    <span>Partenza: {{viaggio.origin}}</span>
+    <span>Arrivo: {{viaggio.destination}}</span>
+    <span>Data partenza: {{viaggio.departuretime| date:'HH:ss dd/MM/yyyy'}}</span>
+    <span>Durata: {{viaggio.duration}}</span>
+    <span *ngIf="viaggio.minprice>0"> Prezzo: {{viaggio.minprice}}</span>
+    <span *ngIf="viaggio.minprice==0"> Non disponibile</span>
+    <span><input type="button" value="open Detail" (click)="openDetailTrenitalia(viaggio.idsolution)"></span>
+  </li>
+</ul>
+
