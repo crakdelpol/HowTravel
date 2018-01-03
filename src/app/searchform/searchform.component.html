@@ -22,14 +22,91 @@
     <mat-datepicker #myDatepicker ></mat-datepicker>
   </mat-form-field>
   <mat-form-field>
-      <input matInput placeholder="Ora" [ngModel]="oraPartenza" name="oraPartenza">
+      <input matInput placeholder="Ora"  name="oraPartenza" value="{{oraPartenza}}">
   </mat-form-field>
-  <button mat-button (click)="findTravels()">Cerca</button>
+
+  <mat-form-field>
+    <mat-select [(value)]="posti" placeholder="Posti">
+      <mat-option value="1">1</mat-option>
+      <mat-option value="2">2</mat-option>
+      <mat-option value="3">3</mat-option>
+      <mat-option value="4">4</mat-option>
+    </mat-select>
+  </mat-form-field>
+    <button mat-button (click)="findTravels()">Cerca</button>
 </form>
 
 <h2>My Travels</h2>
 
-<ul *ngIf="blablacarTravel">
+<h3>BlaBlaCar</h3>
+<mat-table *ngIf="dataSourceBlablacar" #table [dataSource]="dataSourceBlablacar" >
+
+  <ng-container matColumnDef="Partenza">
+    <mat-header-cell *matHeaderCellDef> Partenza </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.departure_place.address}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Arrivo">
+    <mat-header-cell *matHeaderCellDef> Arrivo </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.arrival_place.city_name}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="DataPartenza">
+    <mat-header-cell *matHeaderCellDef> Data Partenza </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.departure_date}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Prezzo">
+    <mat-header-cell *matHeaderCellDef> Prezzo </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.price_with_commission.string_value}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Detail">
+    <mat-header-cell *matHeaderCellDef> Dettagli </mat-header-cell>
+    <mat-cell *matCellDef="let element"><input type="button" value="open Detail" (click)="openDetail(element.links._front)"></mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>
+
+<h3 *ngIf="trenitaliaTravel">Trenitalia</h3>
+<mat-table #table *ngIf="trenitaliaTravel" [dataSource]="dataSourceTrenitalia">
+
+  <ng-container matColumnDef="Partenza">
+    <mat-header-cell *matHeaderCellDef> Partenza </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.origin}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Arrivo">
+    <mat-header-cell *matHeaderCellDef> Arrivo </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.destination}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="DataPartenza">
+    <mat-header-cell *matHeaderCellDef> Data Partenza </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.departuretime| date:'HH:ss dd/MM/yyyy'}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Prezzo">
+    <mat-header-cell *matHeaderCellDef> Prezzo </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.minprice}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Detail">
+    <mat-header-cell *matHeaderCellDef> Dettagli </mat-header-cell>
+    <mat-cell *matCellDef="let element"><input type="button" value="open Detail" (click)="openDetailTrenitalia(element.idsolution)"> </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>
+
+
+
+<!--ul *ngIf="blablacarTravel">
   <h3>BlaBlaCar</h3>
   <li *ngFor="let viaggio of blablacarTravel.trips" >
     <span>Partenza: {{viaggio.departure_place.address}}, {{viaggio.departure_place.city_name}}</span>
@@ -38,9 +115,9 @@
     <span>Prezzo: {{viaggio.price_with_commission.string_value}}</span>
     <span><input type="button" value="open Detail" (click)="openDetail(viaggio.links._front)"></span>
   </li>
-</ul>
+</ul-->
 
-<ul *ngIf="trenitaliaTravel">
+<!--ul *ngIf="trenitaliaTravel">
   <h3>Trenitalia</h3>
   <li *ngFor="let viaggio of trenitaliaTravel" >
     <span>Partenza: {{viaggio.origin}}</span>
@@ -51,5 +128,5 @@
     <span *ngIf="viaggio.minprice==0"> Non disponibile</span>
     <span><input type="button" value="open Detail" (click)="openDetailTrenitalia(viaggio.idsolution)"></span>
   </li>
-</ul>
+</ul-->
 

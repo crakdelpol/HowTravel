@@ -4,7 +4,7 @@ import {BlaBlaCarTravel} from '../BlaBlaCarTravel';
 import {TrenitaliaTravel} from '../TrenitaliaTravel';
 import {FormControl} from '@angular/forms';
 import {APP_DATE_FORMATS, AppDateAdapter} from '../AppDateAdapter';
-import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material';
+import {DateAdapter, MAT_DATE_FORMATS, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-searchform',
@@ -30,6 +30,14 @@ export class SearchformComponent implements OnInit {
   searchResultArrivo = [];
   dateNow: Date = new Date();
   oraPartenza: string;
+  posti = '1';
+  blablacarTravel: BlaBlaCarTravel[];
+  trenitaliaTravel: TrenitaliaTravel[];
+
+  displayedColumns = ['Partenza', 'Arrivo', 'DataPartenza', 'Prezzo', 'Detail'];
+  dataSourceBlablacar = new MatTableDataSource();
+  dataSourceTrenitalia = new MatTableDataSource();
+
 
   constructor(private travelService: TravelService) {
 
@@ -51,10 +59,6 @@ export class SearchformComponent implements OnInit {
 
   }
 
-  blablacarTravel: BlaBlaCarTravel[];
-  trenitaliaTravel: TrenitaliaTravel[];
-
-
   ngOnInit() {
     this.data.setValue(this.dateNow);
     this.oraPartenza = this.dateNow.getHours() + ':' + this.dateNow.getMinutes();
@@ -66,9 +70,18 @@ export class SearchformComponent implements OnInit {
    */
   getTravels(): void {
 
-    this.travelService.getBlablacarTravels(this.partenza.value, this.arrivo.value, this.data.value, this.oraPartenza).subscribe(blablacarTravel => this.blablacarTravel = blablacarTravel);
-    this.travelService.getTrenitaliaTravels(this.partenza.value, this.arrivo.value, this.data.value, this.oraPartenza).subscribe(trenitaliaTravel => this.trenitaliaTravel = trenitaliaTravel);
+    this.travelService.getBlablacarTravels(this.partenza.value, this.arrivo.value, this.data.value, this.oraPartenza, this.posti).subscribe( blablacarTravel => (
 
+        this.blablacarTravel = blablacarTravel
+        , this.dataSourceBlablacar = new MatTableDataSource(this.blablacarTravel.trips)
+      )
+
+    );
+    this.travelService.getTrenitaliaTravels(this.partenza.value, this.arrivo.value, this.data.value, this.oraPartenza, this.posti).subscribe(trenitaliaTravel => (
+        this.trenitaliaTravel = trenitaliaTravel
+        , this.dataSourceTrenitalia = new MatTableDataSource(trenitaliaTravel)
+      )
+    );
   }
 
   openDetail(url: string): void {

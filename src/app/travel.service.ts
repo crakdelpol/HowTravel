@@ -20,11 +20,9 @@ export class TravelService {
    * @param arrivo luogo di arrivo
    * @param data data del viaggio
    * @param oraPartenza ora della partenza
-   * @returns {Observable<BlaBlaCarTravel[]>}
+   * @returns {Observable<BlaBlaCarTravel>}
    */
-  getBlablacarTravels(partenza: string, arrivo: string, data: Date, oraPartenza: string): Observable<BlaBlaCarTravel[]> {
-
-    const posti = 1;
+  getBlablacarTravels(partenza: string, arrivo: string, data: Date, oraPartenza: string, posti: string): Observable<BlaBlaCarTravel[]> {
 
     const dateBegin = data.getDate() + '/' + (data.getMonth() + 1) + '/' + data.getFullYear() + ' ' + oraPartenza + ':00';
     const dateEnd = data.getDate() + '/' + (data.getMonth() + 1) + '/' + data.getFullYear();
@@ -32,8 +30,6 @@ export class TravelService {
     const locale = 'it_IT';
 
     const url = 'https://public-api.blablacar.com/api/v2/trips?key=' + key + '&fn=' + partenza + '&tn=' + arrivo + '&locale=' + locale + '&seats=' + posti + '&db=' + dateBegin + '&de=' + dateEnd;
-
-    console.log(url);
 
     return this.http.get<BlaBlaCarTravel[]>(url)
       .pipe(catchError(this.handleError('getTravels', [])));
@@ -47,10 +43,10 @@ export class TravelService {
    * @param data data di partenza
    * @returns {Observable<TrenitaliaTravel[]>}
    */
-  getTrenitaliaTravels(partenza, arrivo, data: Date, oraPartenza: string): Observable<TrenitaliaTravel[]> {
+  getTrenitaliaTravels(partenza, arrivo, data: Date, oraPartenza: string, posti: string): Observable<TrenitaliaTravel[]> {
 
     const dataConverted = data.getDate() + '/' + (data.getMonth() + 1) + '/' + data.getFullYear();
-    const url = 'https://www.lefrecce.it/msite/api/solutions?origin=' + partenza + '&destination=' + arrivo + '&arflag=A&adate=' + dataConverted + '&atime=' + oraPartenza + '&adultno=1&childno=0&direction=A&frecce=false&onlyRegional=false';
+    const url = 'https://www.lefrecce.it/msite/api/solutions?origin=' + partenza + '&destination=' + arrivo + '&arflag=A&adate=' + dataConverted + '&atime=' + oraPartenza + '&adultno=' + posti + '&childno=0&direction=A&frecce=false&onlyRegional=false';
 
     return this.http.get<TrenitaliaTravel[]>(url)
     .pipe(catchError(this.handleError('getTrenitaliaTravels', [])));

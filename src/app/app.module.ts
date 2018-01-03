@@ -7,9 +7,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TravelService} from './travel.service';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MAT_DATE_FORMATS, MatInputModule, NativeDateModule} from '@angular/material';
+import {MAT_DATE_FORMATS, MatInputModule, MatSelectModule, NativeDateModule} from '@angular/material';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -27,7 +28,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatInputModule,
     MatDatepickerModule,
     NativeDateModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule,
+    MatTableModule
   ],
   providers: [
     TravelService,
