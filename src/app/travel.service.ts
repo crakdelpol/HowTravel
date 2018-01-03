@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {BlaBlaCarTravel} from './BlaBlaCarTravel';
 import {TrenitaliaTravel} from './TrenitaliaTravel';
+import 'rxjs/add/operator/map';
 
 
 
@@ -18,17 +19,21 @@ export class TravelService {
    * @param partenza luogo di partenza
    * @param arrivo luogo di arrivo
    * @param data data del viaggio
+   * @param oraPartenza ora della partenza
    * @returns {Observable<BlaBlaCarTravel[]>}
    */
-  getBlablacarTravels(partenza, arrivo, data): Observable<BlaBlaCarTravel[]> {
+  getBlablacarTravels(partenza: string, arrivo: string, data: Date, oraPartenza: string): Observable<BlaBlaCarTravel[]> {
 
     const posti = 1;
-    const dateBegin = data;
-    const dateEnd = data;
+
+    const dateBegin = data.getDate() + '/' + (data.getMonth() + 1) + '/' + data.getFullYear() + ' ' + oraPartenza + ':00';
+    const dateEnd = data.getDate() + '/' + (data.getMonth() + 1) + '/' + data.getFullYear();
     const key = '84e9c2969be64b79b1e9f297d6c6c93e';
     const locale = 'it_IT';
 
     const url = 'https://public-api.blablacar.com/api/v2/trips?key=' + key + '&fn=' + partenza + '&tn=' + arrivo + '&locale=' + locale + '&seats=' + posti + '&db=' + dateBegin + '&de=' + dateEnd;
+
+    console.log(url);
 
     return this.http.get<BlaBlaCarTravel[]>(url)
       .pipe(catchError(this.handleError('getTravels', [])));
@@ -42,25 +47,10 @@ export class TravelService {
    * @param data data di partenza
    * @returns {Observable<TrenitaliaTravel[]>}
    */
-  getTrenitaliaTravels(partenza, arrivo, data): Observable<TrenitaliaTravel[]> {
+  getTrenitaliaTravels(partenza, arrivo, data: Date, oraPartenza: string): Observable<TrenitaliaTravel[]> {
 
-    //@todo bisogna fare un convertitore citta' -> stazione per adesso fatto a cazzo cosi'
-    //    const stazionePartenza = this.getStazioneTreno(partenza).subscribe(stazione => if(stazione.length .));
-
-    switch (partenza) {
-      case 'milano': partenza = 'MILANO CENTRALE';
-        break;
-      default : partenza = 'MILANO CENTRALE';
-
-    }
-
-    switch (arrivo) {
-      case 'roma': arrivo = 'ROMA TERMINI';
-        break;
-      default : arrivo = 'ROMA TERMINI';
-    }
-
-    const url = 'https://www.lefrecce.it/msite/api/solutions?origin=' + partenza + '&destination=' + arrivo + '&arflag=A&adate=' + data + '&atime=17&adultno=1&childno=0&direction=A&frecce=false&onlyRegional=false';
+    const dataConverted = data.getDate() + '/' + (data.getMonth() + 1) + '/' + data.getFullYear();
+    const url = 'https://www.lefrecce.it/msite/api/solutions?origin=' + partenza + '&destination=' + arrivo + '&arflag=A&adate=' + dataConverted + '&atime=' + oraPartenza + '&adultno=1&childno=0&direction=A&frecce=false&onlyRegional=false';
 
     return this.http.get<TrenitaliaTravel[]>(url)
     .pipe(catchError(this.handleError('getTrenitaliaTravels', [])));
@@ -72,12 +62,12 @@ export class TravelService {
    * @param nome
    * @returns {Observable<Station[]>}
    */
-  getStazioneTreno(nome): Observable<Station[]> {
+  getStazione(term): Observable<Station[]> {
 
-    const url = 'https://www.lefrecce.it/msite/api/geolocations/locations?name=' + nome;
+    const url = 'https://www.lefrecce.it/msite/api/geolocations/locations?name=' + term;
 
-    return this.http.get<Station[]>(url)
-      .pipe(catchError(this.handleError('getStazioneTreno', [])));
+    return this.http.get<Station[]>(url).pipe(catchError(this.handleError('getStazione', [])));
+
   }
 
   /**

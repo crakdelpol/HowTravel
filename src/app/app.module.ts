@@ -1,11 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppComponent } from './app.component';
 import { SearchformComponent } from './searchform/searchform.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TravelService} from './travel.service';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MAT_DATE_FORMATS, MatInputModule, NativeDateModule} from '@angular/material';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -15,11 +20,24 @@ import {TravelService} from './travel.service';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatDatepickerModule,
+    NativeDateModule,
+    MatButtonModule
   ],
   providers: [
-    TravelService
+    TravelService,
+    {provide: MAT_DATE_FORMATS, useValue: 'en-GB'},
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {
+
+
+
+}

@@ -1,19 +1,31 @@
-<div>
-  <label>Partenza:
-    <input [(ngModel)]="travel.partenza" placeholder="Partenza">
-  </label>
-</div>
-<div>
-  <label>Arrivo:
-    <input [(ngModel)]="travel.arrivo" placeholder="Arrivo">
-  </label>
-</div>
-<div>
-  <label>Data:
-    <input [(ngModel)]="travel.data" placeholder="Data">
-  </label>
-</div>
-<div><input type="button" value="cerca" (click)="findTravels()"></div>
+<form class="example-form">
+  <mat-form-field class="example-full-width" >
+    <input type="text" placeholder="Partenza" aria-label="Number" matInput [formControl]="partenza" [matAutocomplete]="autocompletePartenza">
+    <mat-autocomplete #autocompletePartenza="matAutocomplete">
+      <mat-option *ngFor="let item of searchResultPartenza" [value]="item.name">
+        {{ item.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="Arrivo" aria-label="Number" matInput [formControl]="arrivo" [matAutocomplete]="autocompleteArrivo">
+    <mat-autocomplete #autocompleteArrivo="matAutocomplete">
+      <mat-option *ngFor="let item of searchResultArrivo" [value]="item.name">
+        {{ item.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="myDatepicker" placeholder="Data" [formControl]="data" >
+    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+    <mat-datepicker #myDatepicker ></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+      <input matInput placeholder="Ora" [ngModel]="oraPartenza" name="oraPartenza">
+  </mat-form-field>
+  <button mat-button (click)="findTravels()">Cerca</button>
+</form>
 
 <h2>My Travels</h2>
 
