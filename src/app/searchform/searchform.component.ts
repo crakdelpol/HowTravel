@@ -61,7 +61,10 @@ export class SearchformComponent implements OnInit {
 
   ngOnInit() {
     this.data.setValue(this.dateNow);
-    this.oraPartenza = this.dateNow.getHours() + ':' + this.dateNow.getMinutes();
+
+    const ora = this.dateNow.getHours() < 10 ? '0' + this.dateNow.getHours() : this.dateNow.getHours();
+    const minuti = this.dateNow.getMinutes() < 10 ? '0' + this.dateNow.getMinutes() : this.dateNow.getMinutes();
+    this.oraPartenza =  ora + ':' + minuti;
   }
 
   /**
@@ -71,17 +74,16 @@ export class SearchformComponent implements OnInit {
   getTravels(): void {
 
     this.travelService.getBlablacarTravels(this.partenza.value, this.arrivo.value, this.data.value, this.oraPartenza, this.posti).subscribe( blablacarTravel => (
-
         this.blablacarTravel = blablacarTravel
-        , this.dataSourceBlablacar = new MatTableDataSource(this.blablacarTravel.trips)
+        , this.dataSourceBlablacar = new MatTableDataSource(blablacarTravel['trips'])
       )
-
     );
     this.travelService.getTrenitaliaTravels(this.partenza.value, this.arrivo.value, this.data.value, this.oraPartenza, this.posti).subscribe(trenitaliaTravel => (
         this.trenitaliaTravel = trenitaliaTravel
         , this.dataSourceTrenitalia = new MatTableDataSource(trenitaliaTravel)
       )
     );
+
   }
 
   openDetail(url: string): void {

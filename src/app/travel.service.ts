@@ -41,6 +41,8 @@ export class TravelService {
    * @param partenza stazione di partenza
    * @param arrivo stazione di arrivo
    * @param data data di partenza
+   * @param oraPartenza
+   * @param posti
    * @returns {Observable<TrenitaliaTravel[]>}
    */
   getTrenitaliaTravels(partenza, arrivo, data: Date, oraPartenza: string, posti: string): Observable<TrenitaliaTravel[]> {

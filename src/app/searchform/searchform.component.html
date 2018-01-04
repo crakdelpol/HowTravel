@@ -22,7 +22,7 @@
     <mat-datepicker #myDatepicker ></mat-datepicker>
   </mat-form-field>
   <mat-form-field>
-      <input matInput placeholder="Ora"  name="oraPartenza" value="{{oraPartenza}}">
+      <input matInput placeholder="Ora"  name="oraPartenza" [(ngModel)]="oraPartenza">
   </mat-form-field>
 
   <mat-form-field>
@@ -38,8 +38,8 @@
 
 <h2>My Travels</h2>
 
-<h3>BlaBlaCar</h3>
-<mat-table *ngIf="dataSourceBlablacar" #table [dataSource]="dataSourceBlablacar" >
+<h3 *ngIf="blablacarTravel">BlaBlaCar</h3>
+<mat-table *ngIf="blablacarTravel" #table [dataSource]="dataSourceBlablacar" >
 
   <ng-container matColumnDef="Partenza">
     <mat-header-cell *matHeaderCellDef> Partenza </mat-header-cell>
@@ -104,29 +104,4 @@
 
 </mat-table>
 
-
-
-<!--ul *ngIf="blablacarTravel">
-  <h3>BlaBlaCar</h3>
-  <li *ngFor="let viaggio of blablacarTravel.trips" >
-    <span>Partenza: {{viaggio.departure_place.address}}, {{viaggio.departure_place.city_name}}</span>
-    <span>Arrivo: {{viaggio.arrival_place.address}}, {{viaggio.arrival_place.city_name}}</span>
-    <span>Data partenza: {{viaggio.departure_date}}</span>
-    <span>Prezzo: {{viaggio.price_with_commission.string_value}}</span>
-    <span><input type="button" value="open Detail" (click)="openDetail(viaggio.links._front)"></span>
-  </li>
-</ul-->
-
-<!--ul *ngIf="trenitaliaTravel">
-  <h3>Trenitalia</h3>
-  <li *ngFor="let viaggio of trenitaliaTravel" >
-    <span>Partenza: {{viaggio.origin}}</span>
-    <span>Arrivo: {{viaggio.destination}}</span>
-    <span>Data partenza: {{viaggio.departuretime| date:'HH:ss dd/MM/yyyy'}}</span>
-    <span>Durata: {{viaggio.duration}}</span>
-    <span *ngIf="viaggio.minprice>0"> Prezzo: {{viaggio.minprice}}</span>
-    <span *ngIf="viaggio.minprice==0"> Non disponibile</span>
-    <span><input type="button" value="open Detail" (click)="openDetailTrenitalia(viaggio.idsolution)"></span>
-  </li>
-</ul-->
 
