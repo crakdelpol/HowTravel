@@ -25,7 +25,12 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+ 
+## Links
 
+See the project page here https://crakdelpol.github.io/HowTravel/
+
+## Riconoscimenti
 
 Utilizzate API di blablacar che si trovano al seguente indirizzo : https://dev.blablacar.com/docs/versions/1.0
 
@@ -35,4 +40,4 @@ Utilizzato angular Material : https://material.angular.io/guide/getting-started
 
 Utilizzato autocomplete angular : https://material.angular.io/components/autocomplete/api
 
-Implementare API con flixbus
+
