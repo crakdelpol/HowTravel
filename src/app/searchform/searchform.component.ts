@@ -63,10 +63,12 @@ export class SearchformComponent implements OnInit {
       if (data && data.length > 2) {
         console.log("utilizzo nuovo");
 
+        /*
         t.autocomplete(data).then(valueFind => {
           console.table(valueFind);
           this.searchResultPartenza = valueFind;
         });
+        */
         /*
         this.travelService.getStazione(data).subscribe(response => {
           this.searchResultPartenza = response;
