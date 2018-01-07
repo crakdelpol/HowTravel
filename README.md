@@ -34,7 +34,9 @@ See the project page here https://crakdelpol.github.io/HowTravel/
 
 Utilizzate API di blablacar che si trovano al seguente indirizzo : https://dev.blablacar.com/docs/versions/1.0
 
-Utilizzate API di trenitalia che si trovano al seguente indirizzo : https://github.com/SimoDax/Trenitalia-API/wiki/API-Trenitalia---lefrecce.it
+Utilizzata wiki di trenitalia che si trovano al seguente indirizzo : https://github.com/SimoDax/Trenitalia-API/wiki/API-Trenitalia---lefrecce.it
+
+Utilizzate API di trenitalia che si trovano al seguente indirizzo : https://github.com/TrinTragula/api-trenitalia
 
 Utilizzato angular Material : https://material.angular.io/guide/getting-started
 
