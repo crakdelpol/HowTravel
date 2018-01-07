@@ -41,11 +41,37 @@ export class SearchformComponent implements OnInit {
 
   constructor(private travelService: TravelService) {
 
+
+        const Trenitalia = require('api-trenitalia');
+        const t = new Trenitalia();
+/*
+        t.autocomplete('milan')
+          .then(c => {
+            const name = c[0].name;
+            return t.getSolutions(name, 'BARI ( TUTTE LE STAZIONI )', '15/01/2018', '13', 2, 0);
+          })
+          .then(dataSolution => {
+            const id = dataSolution[0].idsolution;
+            return t.getCustomizedPriceDetails(id);
+          })
+          .then(data => {
+            console.log(data);
+          });
+*/
+
     this.partenza.valueChanges.subscribe( data => {
       if (data && data.length > 2) {
+        console.log("utilizzo nuovo");
+
+        t.autocomplete(data).then(valueFind => {
+          console.table(valueFind);
+          this.searchResultPartenza = valueFind;
+        });
+        /*
         this.travelService.getStazione(data).subscribe(response => {
           this.searchResultPartenza = response;
         });
+        */
       }
     });
 
