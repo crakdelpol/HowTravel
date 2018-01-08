@@ -17,13 +17,12 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput [matDatepicker]="myDatepicker" placeholder="Data" [formControl]="data" >
+    <input matInput [matDatepicker]="myDatepicker" placeholder="Data" [formControl]="data">
     <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
     <mat-datepicker #myDatepicker ></mat-datepicker>
   </mat-form-field>
   <mat-form-field>
-    <input matInput [textMask]="{mask: maskOra, pipe: autoCorrectedOraPipe}" [(ngModel)]="oraPartenza" type="text"/>
-      <!--input matInput placeholder="Ora"  name="oraPartenza" [(ngModel)]="oraPartenza"-->
+    <input matInput [textMask]="{mask: maskOra, pipe: autoCorrectedOraPipe}" [(ngModel)]="oraPartenza" type="text" name="oraPartenza"/>
   </mat-form-field>
 
   <mat-form-field>
@@ -96,7 +95,7 @@
 
   <ng-container matColumnDef="Prezzo">
     <mat-header-cell *matHeaderCellDef> Prezzo </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.minprice}}</mat-cell>
+    <mat-cell *matCellDef="let element"> {{element.minprice}} €</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="Detail">
