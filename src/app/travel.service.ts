@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {BlaBlaCarTravel} from './BlaBlaCarTravel';
 import {TrenitaliaTravel} from './TrenitaliaTravel';
+import {AppSettings} from '../AppSettings';
 import 'rxjs/add/operator/map';
 
 
@@ -26,10 +27,10 @@ export class TravelService {
 
     const dateBegin = data.getDate() + '/' + (data.getMonth() + 1) + '/' + data.getFullYear() + ' ' + oraPartenza + ':00';
     const dateEnd = data.getDate() + '/' + (data.getMonth() + 1) + '/' + data.getFullYear();
-    const key = '84e9c2969be64b79b1e9f297d6c6c93e';
+    const key = AppSettings.TOKEN_BLABLACAR;
     const locale = 'it_IT';
 
-    const url = 'https://public-api.blablacar.com/api/v2/trips?key=' + key + '&fn=' + partenza + '&tn=' + arrivo + '&locale=' + locale + '&seats=' + posti + '&db=' + dateBegin + '&de=' + dateEnd;
+    const url = AppSettings.URL_BLABLACAR + '/trips?key=' + key + '&fn=' + partenza + '&tn=' + arrivo + '&locale=' + locale + '&seats=' + posti + '&db=' + dateBegin + '&de=' + dateEnd;
 
     return this.http.get<BlaBlaCarTravel[]>(url)
       .pipe(catchError(this.handleError('getTravels', [])));
@@ -48,7 +49,7 @@ export class TravelService {
   getTrenitaliaTravels(partenza, arrivo, data: Date, oraPartenza: string, posti: string): Observable<TrenitaliaTravel[]> {
 
     const dataConverted = data.getDate() + '/' + (data.getMonth() + 1) + '/' + data.getFullYear();
-    const url = 'https://www.lefrecce.it/msite/api/solutions?origin=' + partenza + '&destination=' + arrivo + '&arflag=A&adate=' + dataConverted + '&atime=' + oraPartenza + '&adultno=' + posti + '&childno=0&direction=A&frecce=false&onlyRegional=false';
+    const url =  AppSettings.URL_PROXY + AppSettings.URL_TRENITALIA + '?origin=' + partenza + '&destination=' + arrivo + '&arflag=A&adate=' + dataConverted + '&atime=' + oraPartenza + '&adultno=' + posti + '&childno=0&direction=A&frecce=false&onlyRegional=false';
 
     return this.http.get<TrenitaliaTravel[]>(url)
     .pipe(catchError(this.handleError('getTrenitaliaTravels', [])));
@@ -62,9 +63,9 @@ export class TravelService {
    */
   getStazione(term): Observable<Station[]> {
 
-    const url = 'https://www.lefrecce.it/msite/api/geolocations/locations?name=' + term;
-
-    return this.http.get<Station[]>(url).pipe(catchError(this.handleError('getStazione', [])));
+    const url =  AppSettings.URL_TRENITALIA_STAZIONI + '?name=' + term;
+    const proxy = AppSettings.URL_PROXY;
+    return this.http.get<Station[]>(proxy + url).pipe(catchError(this.handleError('getStazione', [])));
 
   }
 

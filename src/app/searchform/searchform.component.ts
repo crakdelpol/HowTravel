@@ -5,6 +5,7 @@ import {TrenitaliaTravel} from '../TrenitaliaTravel';
 import {FormControl} from '@angular/forms';
 import {APP_DATE_FORMATS, AppDateAdapter} from '../AppDateAdapter';
 import {DateAdapter, MAT_DATE_FORMATS, MatTableDataSource} from '@angular/material';
+import {AppSettings} from "../../AppSettings";
 
 @Component({
   selector: 'app-searchform',
@@ -38,43 +39,17 @@ export class SearchformComponent implements OnInit {
   dataSourceBlablacar = new MatTableDataSource();
   dataSourceTrenitalia = new MatTableDataSource();
 
-
   constructor(private travelService: TravelService) {
-
-
-        const Trenitalia = require('api-trenitalia');
-        const t = new Trenitalia();
-/*
-        t.autocomplete('milan')
-          .then(c => {
-            const name = c[0].name;
-            return t.getSolutions(name, 'BARI ( TUTTE LE STAZIONI )', '15/01/2018', '13', 2, 0);
-          })
-          .then(dataSolution => {
-            const id = dataSolution[0].idsolution;
-            return t.getCustomizedPriceDetails(id);
-          })
-          .then(data => {
-            console.log(data);
-          });
-*/
 
     this.partenza.valueChanges.subscribe( data => {
       if (data && data.length > 2) {
-        console.log("utilizzo nuovo");
 
-        /*
-        t.autocomplete(data).then(valueFind => {
-          console.table(valueFind);
-          this.searchResultPartenza = valueFind;
-        });
-        */
-        /*
         this.travelService.getStazione(data).subscribe(response => {
           this.searchResultPartenza = response;
         });
-        */
+
       }
+
     });
 
     this.arrivo.valueChanges.subscribe( data => {
@@ -119,7 +94,7 @@ export class SearchformComponent implements OnInit {
   }
 
   openDetailTrenitalia(idSolution: string): void {
-    const url = 'https://www.lefrecce.it/msite/api/solutions/' + idSolution + '/details';
+    const url = AppSettings.URL_TRENITALIA_SOLUTION + '/' + idSolution + '/details';
     return this.openDetail(url);
   }
 
