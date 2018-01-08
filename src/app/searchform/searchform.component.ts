@@ -5,7 +5,9 @@ import {TrenitaliaTravel} from '../TrenitaliaTravel';
 import {FormControl} from '@angular/forms';
 import {APP_DATE_FORMATS, AppDateAdapter} from '../AppDateAdapter';
 import {DateAdapter, MAT_DATE_FORMATS, MatTableDataSource} from '@angular/material';
-import {AppSettings} from "../../AppSettings";
+import {AppSettings} from '../../AppSettings';
+import {createAutoCorrectedDatePipe} from "text-mask-addons/dist/textMaskAddons";
+
 
 @Component({
   selector: 'app-searchform',
@@ -39,6 +41,16 @@ export class SearchformComponent implements OnInit {
   dataSourceBlablacar = new MatTableDataSource();
   dataSourceTrenitalia = new MatTableDataSource();
 
+  autoCorrectedOraPipe = createAutoCorrectedDatePipe('HH:MM');
+
+
+  maskOra = function(){
+    return [/\d/, /\d/, ':', /\d/, /\d/];
+  };
+  /*
+  autoCorrectedDataPipe = createAutoCorrectedDatePipe('dd/mm/yyyy');
+  maskData = function()  {return [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];}
+*/
   constructor(private travelService: TravelService) {
 
     this.partenza.valueChanges.subscribe( data => {

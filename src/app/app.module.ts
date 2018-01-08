@@ -11,6 +11,7 @@ import {MAT_DATE_FORMATS, MatInputModule, MatSelectModule, NativeDateModule} fro
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
+import {TextMaskModule} from 'angular2-text-mask';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {MatTableModule} from '@angular/material/table';
     NativeDateModule,
     MatButtonModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    TextMaskModule
   ],
   providers: [
     TravelService,

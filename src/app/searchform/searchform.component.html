@@ -17,12 +17,13 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput [matDatepicker]="myDatepicker" placeholder="Data" [(ngModel)]="data" >
+    <input matInput [matDatepicker]="myDatepicker" placeholder="Data" [formControl]="data" >
     <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
     <mat-datepicker #myDatepicker ></mat-datepicker>
   </mat-form-field>
   <mat-form-field>
-      <input matInput placeholder="Ora"  name="oraPartenza" [(ngModel)]="oraPartenza">
+    <input matInput [textMask]="{mask: maskOra, pipe: autoCorrectedOraPipe}" [(ngModel)]="oraPartenza" type="text"/>
+      <!--input matInput placeholder="Ora"  name="oraPartenza" [(ngModel)]="oraPartenza"-->
   </mat-form-field>
 
   <mat-form-field>
