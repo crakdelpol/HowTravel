@@ -1,5 +1,5 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width" >
+<form class="main-form centred">
+  <mat-form-field class="example-full-width">
     <input type="text" placeholder="Partenza" aria-label="Number" matInput [formControl]="partenza" [matAutocomplete]="autocompletePartenza">
     <mat-autocomplete #autocompletePartenza="matAutocomplete">
       <mat-option *ngFor="let item of searchResultPartenza" [value]="item.name">
@@ -17,7 +17,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput [matDatepicker]="myDatepicker" placeholder="Data" [formControl]="data" >
+    <input matInput [matDatepicker]="myDatepicker" placeholder="Data" [(ngModel)]="data" >
     <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
     <mat-datepicker #myDatepicker ></mat-datepicker>
   </mat-form-field>
@@ -33,10 +33,14 @@
       <mat-option value="4">4</mat-option>
     </mat-select>
   </mat-form-field>
-    <button mat-button (click)="findTravels()">Cerca</button>
+  <div class="divbuttoncerca">
+    <button mat-button (click)="findTravels()" class="btn">Cerca</button>
+  </div>
 </form>
+<div class="centred">
+  <h2>Viaggi Disponibili</h2>
+</div>
 
-<h2>My Travels</h2>
 
 <h3 *ngIf="blablacarTravel">BlaBlaCar</h3>
 <mat-table *ngIf="blablacarTravel" #table [dataSource]="dataSourceBlablacar" >
