@@ -1,5 +1,6 @@
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/2008/badge)](https://bestpractices.coreinfrastructure.org/projects/2008) [![License](https://img.shields.io/npm/l/@angular/cli.svg)](https://github.com/crakdelpol/HowTravel/edit/master/LICENSE) 
 
+![Build](https://travis-ci.org/crakdelpol/HowTravel.svg?branch=master)
 
 # HowTravel
 
