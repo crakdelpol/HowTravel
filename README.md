@@ -35,7 +35,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Contributing 
 
-If you want contribute see [Contributing](https://github.com/crakdelpol/HowTravel/edit/master/CONTRIBUTING.md) section.
+If you want contribute see [Contributing](https://github.com/crakdelpol/HowTravel/blob/master/CONTRIBUTING.md) section.
 
 ## Links
 
