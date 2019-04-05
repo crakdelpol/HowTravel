@@ -1,6 +1,4 @@
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/2008/badge)](https://bestpractices.coreinfrastructure.org/projects/2008) [![License](https://img.shields.io/npm/l/@angular/cli.svg)](https://github.com/crakdelpol/HowTravel/edit/master/LICENSE) 
-
-![Build](https://travis-ci.org/crakdelpol/HowTravel.svg?branch=master)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/2008/badge)](https://bestpractices.coreinfrastructure.org/projects/2008) [![License](https://img.shields.io/npm/l/@angular/cli.svg)](https://github.com/crakdelpol/HowTravel/edit/master/LICENSE) ![Build](https://travis-ci.org/crakdelpol/HowTravel.svg?branch=master)
 
 # HowTravel
 
@@ -51,7 +49,5 @@ Utilizzata wiki di trenitalia che si trovano al seguente indirizzo : https://git
 Utilizzate API di trenitalia che si trovano al seguente indirizzo : https://github.com/TrinTragula/api-trenitalia
 
 Utilizzato angular Material : https://material.angular.io/guide/getting-started
-
-Utilizzato autocomplete angular : https://material.angular.io/components/autocomplete/api
 
 
